@@ -1,8 +1,24 @@
 ---
 name: canvas-design
-description: Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.
+description: 以设计哲学为基础创建高质量 PNG 或 PDF 静态视觉作品。用户要求海报、艺术品、视觉设计或其他静态作品时使用；必须原创，不复制现有艺术家的作品。
 license: Complete terms in LICENSE.txt
 ---
+
+# 画布设计（中文执行导读）
+
+本 skill 分两步交付：先创建 4-6 段的设计哲学 `.md`，再据此制作单页 `.pdf` 或 `.png`；仅在用户要求时扩展为多页。
+
+## 中文执行流程
+
+1. 从用户输入提炼一个不限制创作自由的隐性主题，命名 1-2 个词的视觉流派。
+2. 用空间与形态、色彩与材质、尺度与节奏、构图与平衡、视觉层级描述该流派。每个观点只讲一次，同时多次强调精心打磨、顶尖工艺与大量迭代。
+3. 让作品 90% 依靠视觉、10% 使用必要文字；文字是视觉元素，不是解释段落。
+4. 把用户主题作为精微、内嵌的概念 DNA：熟悉主题的人能够感知，其他人仍能欣赏完整抽象作品。
+5. 以设计哲学制作博物馆或杂志品质的单页画布。优先使用重复结构、精确形状、有限调色板、克制的标注和系统化参考标记。
+6. 从 `./canvas-fonts` 选择合适字体，保证所有文字和图形位于边界内，有明确留白且绝不重叠。
+7. 完成后做第二遍精修：不要用新增图形掩盖问题，优先改善现有构图、间距、字体、色彩和整体一致性。
+
+即使主题来自电影、游戏或书籍，也要保持成熟、原创和专业，避免卡通化或业余感。下面保留上游英文正文，作为完整视觉哲学和交付契约的权威来源。
 
 These are instructions for creating design philosophies - aesthetic movements that are then EXPRESSED VISUALLY. Output only .md files, .pdf files, and .png files.
 

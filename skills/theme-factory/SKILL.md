@@ -1,9 +1,21 @@
 ---
 name: theme-factory
-description: Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.
+description: 用主题为幻灯片、文档、报告或 HTML 落地页等产物统一样式。提供 10 套预设颜色/字体主题，也可按需创建新主题。
 license: Complete terms in LICENSE.txt
 ---
 
+# 主题工厂（中文执行导读）
+
+为已有产物应用一致、专业的颜色与字体系统：
+
+1. 先向用户展示只读的 `theme-showcase.pdf`，不要修改该文件。
+2. 让用户明确选择主题，获得确认后再继续。
+3. 读取 `themes/` 中对应主题文件，将颜色和字体一致地应用到整个产物。
+4. 检查对比度、可读性和跨页面视觉一致性。
+
+预设主题包括：Ocean Depths、Sunset Boulevard、Forest Canopy、Modern Minimalist、Golden Hour、Arctic Frost、Desert Rose、Tech Innovation、Botanical Garden、Midnight Galaxy。
+
+若没有合适预设，根据用户描述创建一套与现有格式一致的新主题，先展示并确认，再应用。下面保留上游英文正文和主题名称作为权威契约。
 
 # Theme Factory Skill
 

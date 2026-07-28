@@ -1,8 +1,19 @@
 ---
 name: internal-comms
-description: A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).
+description: 按组织惯用格式撰写内部沟通材料。用户要求状态报告、管理层更新、3P 更新、公司通讯、FAQ、事故报告或项目更新等内部沟通时使用。
 license: Complete terms in LICENSE.txt
 ---
+
+# 内部沟通（中文执行导读）
+
+先识别沟通类型，再读取对应范例并遵循其中的结构、语气和信息收集要求：
+
+- 进展、计划、问题（3P）：`examples/3p-updates.md`
+- 全公司通讯：`examples/company-newsletter.md`
+- 常见问题答复：`examples/faq-answers.md`
+- 其他内部沟通：`examples/general-comms.md`
+
+若请求无法对应现有类型，先确认目标读者、期望格式和必要背景。范例保留上游英文，以避免改变组织模板中的固定措辞；最终内容按用户要求的语言输出。
 
 ## When to use this skill
 To write internal communications, use this skill for:

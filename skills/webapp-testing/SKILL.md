@@ -1,8 +1,21 @@
 ---
 name: webapp-testing
-description: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.
+description: 使用 Playwright 与本地 Web 应用交互和测试，覆盖前端功能验证、UI 调试、浏览器截图与控制台日志检查。涉及本地网页自动化或验收时使用。
 license: Complete terms in LICENSE.txt
 ---
+
+# Web 应用测试（中文执行导读）
+
+使用原生 Python Playwright 脚本测试本地应用。优先把 `scripts/with_server.py` 当作黑盒工具：先运行 `--help`，只有确实无法满足需求时才读取源码。
+
+决策流程：
+
+1. 静态 HTML：直接读取文件寻找 selector；若信息不足，再按动态应用处理。
+2. 动态应用且服务未启动：先运行 `python scripts/with_server.py --help`，由 helper 管理一个或多个服务，再执行精简的 Playwright 脚本。
+3. 服务已启动：先导航并等待 `networkidle`，截图或检查渲染后 DOM，发现 selector 后再执行动作。
+4. 使用描述性 selector、必要等待，并始终关闭浏览器。
+
+不要在动态页面完成 JavaScript 执行前检查 DOM。`examples/` 提供元素发现、静态 HTML 自动化和控制台日志示例。下面保留上游英文正文与命令作为权威契约。
 
 # Web Application Testing
 

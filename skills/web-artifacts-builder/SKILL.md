@@ -1,8 +1,22 @@
 ---
 name: web-artifacts-builder
-description: Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.
+description: 使用 React、Tailwind CSS 和 shadcn/ui 创建复杂、多组件的 claude.ai HTML artifact。需要状态管理、路由或 shadcn/ui 时使用；简单单文件 HTML/JSX 不使用。
 license: Complete terms in LICENSE.txt
 ---
+
+# Web Artifact 构建器（中文执行导读）
+
+仅将本 skill 用于需要多个组件、状态管理、路由或 shadcn/ui 的复杂 artifact。简单页面直接编写单文件 HTML/JSX。
+
+执行流程：
+
+1. 运行 `bash scripts/init-artifact.sh <project-name>` 初始化 React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui 项目。
+2. 编辑生成的代码完成 artifact；避免过度居中、紫色渐变、统一大圆角和 Inter 字体等常见 AI 默认风格。
+3. 确保项目根目录存在 `index.html`，再运行 `bash scripts/bundle-artifact.sh`。
+4. 将生成的 `bundle.html` 作为单一、自包含 HTML artifact 交付给用户。
+5. 仅在请求或确有必要时使用 Playwright/Puppeteer 测试，不要让预检不必要地延迟首次交付。
+
+脚本会安装打包依赖、生成 `.parcelrc`、以 Parcel 构建并内联资源。下面保留上游英文正文作为脚本行为的权威说明。
 
 # Web Artifacts Builder
 

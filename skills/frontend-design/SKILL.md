@@ -1,8 +1,25 @@
 ---
 name: frontend-design
-description: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.
+description: 为新建或重塑 UI 提供独特、有意图的视觉设计指导。用户需要界面设计、视觉方向、字体、布局或避免模板化默认风格时使用。
 license: Complete terms in LICENSE.txt
 ---
+
+# 前端设计（中文执行导读）
+
+把自己当作小型设计工作室的设计负责人：先从产品主题、受众和页面唯一目标出发，再做明确且能说明理由的色彩、字体与布局选择。不要套用与主题无关的通用审美。
+
+执行时遵循以下流程：
+
+1. 若 brief 没有明确主题，先确定一个具体主题、目标受众和页面任务，并说明选择。
+2. 先制定简洁设计方案：4-6 个命名色值、至少两种字体角色、布局概念与 ASCII 线框，以及一个最具记忆点的 signature element。
+3. 对照 brief 自我批评；任何看起来可以无差别套用到同类项目的部分都要修改并说明原因。
+4. 再按修订后的 token 和布局实现，留意 CSS specificity、响应式、键盘焦点与 reduced motion。
+5. 把大胆表达集中在一个地方，其余部分保持克制；用截图检查并删掉无助于 brief 的装饰。
+6. 文案从最终用户视角书写：用主动语态、稳定术语和明确动作；错误说明发生了什么及如何修复，空状态引导下一步。
+
+避免把暖米色加陶土色、近黑加荧光强调色、报纸式细线密栏等常见 AI 默认方案当成无意识选择。若 brief 明确要求其中一种，则以 brief 为准。
+
+下面保留上游英文正文，作为完整设计判断与文案规范的权威来源。
 
 # Frontend Design
 

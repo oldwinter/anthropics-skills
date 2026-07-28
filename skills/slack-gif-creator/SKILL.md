@@ -1,8 +1,22 @@
 ---
 name: slack-gif-creator
-description: Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like "make me a GIF of X doing Y for Slack."
+description: 创建并优化适用于 Slack 的动画 GIF，提供尺寸约束、验证工具、缓动和动画方法。用户要求制作 Slack GIF 或 Slack emoji 动画时使用。
 license: Complete terms in LICENSE.txt
 ---
+
+# Slack GIF 制作（中文执行导读）
+
+使用 Pillow 和本 skill 的工具生成细致、适合 Slack 的动画 GIF：
+
+- Emoji GIF 推荐 `128x128`，消息 GIF 使用 `480x480`；帧率 10-30 FPS，颜色 48-128 色，emoji 动画尽量短于 3 秒。
+- 用 `core.gif_builder.GIFBuilder` 组装帧，通过 PIL `ImageDraw` 绘制图形；不要依赖跨平台不稳定的 emoji 字体或假设存在预制图形。
+- 用户上传图片时，先判断是直接动画化还是仅参考风格，再用 PIL 读取。
+- 使用至少 2px 的线条、分层形状、对比明确的配色和细节，避免占位符式基础图形。
+- 用 `core.easing.interpolate` 和 `core.frame_composer` 实现平滑运动；可组合抖动、脉冲、弹跳、旋转、淡入淡出、滑动、缩放和粒子爆发。
+- 仅在用户要求缩小体积时减少帧数、颜色或尺寸，并启用 `remove_duplicates=True`、`optimize_for_emoji=True`。
+- 保存后用 `core.validators.validate_gif` 或 `is_slack_ready` 验证 Slack 约束。
+
+依赖安装命令为 `pip install pillow imageio numpy`。下面保留上游英文正文与代码示例作为 API 契约。
 
 # Slack GIF Creator
 

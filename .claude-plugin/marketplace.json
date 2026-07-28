@@ -5,7 +5,7 @@
     "email": "klazuka@anthropic.com"
   },
   "metadata": {
-    "description": "Anthropic example skills",
+    "description": "Anthropic Agent Skills 中文 fork",
     "version": "1.0.0"
   },
   "plugins": [
@@ -23,7 +23,7 @@
     },
     {
       "name": "example-skills",
-      "description": "Collection of example skills demonstrating various capabilities including skill creation, MCP building, visual design, algorithmic art, internal communications, web testing, artifact building, Slack GIFs, and theme styling",
+      "description": "上游完整示例 skill 集合；已获许可的入口包含中文执行导读，doc-coauthoring 保持英文",
       "source": "./",
       "strict": false,
       "skills": [
@@ -40,11 +40,29 @@
         "./skills/web-artifacts-builder",
         "./skills/webapp-testing"
       ]
-    }
-    ,
+    },
+    {
+      "name": "example-skills-zh",
+      "description": "中文可执行的 Apache-2.0 示例 skill 集合，不包含许可不允许翻译或未明确授权的入口",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/algorithmic-art",
+        "./skills/brand-guidelines",
+        "./skills/canvas-design",
+        "./skills/frontend-design",
+        "./skills/internal-comms",
+        "./skills/mcp-builder",
+        "./skills/skill-creator",
+        "./skills/slack-gif-creator",
+        "./skills/theme-factory",
+        "./skills/web-artifacts-builder",
+        "./skills/webapp-testing"
+      ]
+    },
     {
       "name": "claude-api",
-      "description": "Claude API and SDK documentation skill for building LLM-powered applications",
+      "description": "用于构建 LLM 应用的 Claude API 与 SDK 中文导航 skill",
       "source": "./",
       "strict": false,
       "skills": [

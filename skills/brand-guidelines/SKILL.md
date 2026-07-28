@@ -1,8 +1,20 @@
 ---
 name: brand-guidelines
-description: Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.
+description: 将 Anthropic 官方品牌色、字体和视觉规范应用到各类产物。用户提到 Anthropic 品牌、品牌色、视觉格式、企业识别或设计规范时使用。
 license: Complete terms in LICENSE.txt
 ---
+
+# Anthropic 品牌样式（中文执行导读）
+
+使用本 skill 为演示文稿、文档和其他视觉产物应用 Anthropic 官方风格：
+
+- 主色为深色 `#141413`、浅色 `#faf9f5`、中灰 `#b0aea5`、浅灰 `#e8e6dc`。
+- 强调色依次使用橙色 `#d97757`、蓝色 `#6a9bcc`、绿色 `#788c5d`。
+- 标题使用 Poppins，缺失时回退 Arial；正文使用 Lora，缺失时回退 Georgia。
+- 24pt 及以上文本视为标题；非文本形状循环使用三种强调色。
+- 根据背景选择可读的文本颜色，保留原有层级和格式；无需自动安装字体。
+
+下面保留上游英文正文，作为颜色与字体契约的权威来源。
 
 # Anthropic Brand Styling
 

@@ -1,8 +1,25 @@
 ---
 name: algorithmic-art
-description: Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.
+description: 使用 p5.js、可复现随机种子和交互参数创建算法艺术。用户要求代码艺术、生成艺术、算法艺术、流场或粒子系统时使用；必须原创，不复制现有艺术家的作品。
 license: Complete terms in LICENSE.txt
 ---
+
+# 算法艺术（中文执行导读）
+
+本 skill 分两步交付：先创建 4-6 段的算法哲学 `.md`，再将它实现为基于 `templates/viewer.html` 的单文件交互式 p5.js HTML artifact。
+
+## 中文执行流程
+
+1. 从用户输入提炼一个不限制创作自由的隐性概念种子，为生成艺术流派命名 1-2 个词。
+2. 用计算过程、涌现行为、数学关系、噪声与随机、粒子与力场、时间演化和参数变化描述算法哲学。避免重复，同时多次强调精心调参、深厚计算经验与大量迭代。
+3. 在写任何 HTML 前读取 `templates/viewer.html`，以它作为字面起点。保留 header、sidebar、Anthropic 品牌、seed controls 和 action buttons，只替换注释标明的算法、参数与控件区域。
+4. 始终同时调用 `randomSeed(seed)` 与 `noiseSeed(seed)`，保证相同 seed 产生完全一致的结果。
+5. 让参数从哲学自然生长：数量、尺度、速度、概率、比例、角度和阈值；不要从预设“图案菜单”挑选效果。
+6. 为所有可调参数提供 UI 控件，确保 previous/next/random/jump seed、regenerate、reset、download PNG 均可用。
+7. 把所有 p5.js、样式、算法和控件内联到一个 HTML 文件中；除了 p5.js CDN 不依赖外部文件。
+8. 检查色彩和谐、构图层级、运行性能与可复现性，避免把无约束随机噪声当作生成艺术。
+
+交付算法哲学和单一 HTML artifact。下面保留上游英文正文、模板契约和代码示例作为权威来源。
 
 Algorithmic philosophies are computational aesthetic movements that are then expressed through code. Output .md files (philosophy), .html files (interactive viewer), and .js files (generative algorithms).
 

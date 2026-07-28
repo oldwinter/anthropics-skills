@@ -1,8 +1,27 @@
 ---
 name: mcp-builder
-description: Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
+description: 构建高质量 MCP（Model Context Protocol）服务器，让 LLM 通过设计良好的工具访问外部服务。使用 Python/FastMCP 或 Node/TypeScript MCP SDK 集成 API 时使用。
 license: Complete terms in LICENSE.txt
 ---
+
+# MCP 服务器开发（中文执行导读）
+
+MCP 服务器的质量取决于模型能否借助其工具完成真实任务。按四个阶段执行：
+
+1. **调研与规划**：读取 MCP sitemap 与相关规范；研究目标 API 的认证、数据模型和端点。兼顾全面 API 覆盖与高价值工作流工具，不确定时优先覆盖基础端点。
+2. **实现**：TypeScript 优先使用 MCP SDK + Zod，Python 使用 FastMCP + Pydantic。建立共享 API client、错误处理、响应格式和分页，再逐项实现工具。
+3. **评审与测试**：检查类型覆盖、重复代码、工具描述和可执行错误消息。TypeScript 运行 `npm run build`，Python 运行 `python -m py_compile`，并使用 `npx @modelcontextprotocol/inspector` 验证。
+4. **评测**：读取 `reference/evaluation.md`，创建 10 个独立、只读、复杂、现实、可验证且答案稳定的问题；逐题亲自验证答案并输出规定 XML。
+
+工具设计要求：
+
+- 使用清晰、动作导向且带一致前缀的名称。
+- 输入 schema 包含约束、说明和示例；可行时提供 `outputSchema` 与 `structuredContent`。
+- 为 I/O 使用 async/await，支持分页，错误消息给出具体下一步。
+- 正确声明 `readOnlyHint`、`destructiveHint`、`idempotentHint`、`openWorldHint`。
+- 返回聚焦数据，避免无边界响应污染上下文。
+
+按任务需要读取 `reference/mcp_best_practices.md`、语言实现指南与评测指南。长篇参考保持上游英文，代码、schema、协议名和 URL 不翻译。下面保留完整英文正文作为权威契约。
 
 # MCP Server Development Guide
 

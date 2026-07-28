@@ -1,7 +1,26 @@
 ---
 name: skill-creator
-description: Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.
+description: 创建、修改和迭代改进 Agent Skill，并通过 eval、基准与触发测试衡量效果。用户要求从零创建 skill、编辑现有 skill、测试/比较表现或优化触发描述时使用。
 ---
+
+# Skill 创建与优化（中文执行导读）
+
+先判断用户处于创建、测试、评审还是迭代阶段，再进入对应环节。核心循环是：明确意图 -> 编写 draft -> 用现实 prompt 测试 -> 定量与定性评审 -> 根据反馈改进 -> 扩大测试集。
+
+## 创建流程
+
+1. 从当前对话提取目标、触发场景、输出格式、边界和依赖；仅补问真正缺失的信息。
+2. 编写 `SKILL.md`：保留稳定 `name`，让 `description` 同时说明能力和触发条件；正文使用祈使句并解释关键约束的原因。
+3. 让正文保持精简，接近 500 行时把详细 schema、按语言/平台变化的内容和长示例拆到 `references/`；确定性或重复工作放入 `scripts/`，交付素材放入 `assets/`。
+4. 用 2-3 个真实 prompt 建立 `evals/evals.json`。客观任务编写可验证 assertion，主观任务以人工评审为主。
+5. 同一轮同时运行 with-skill 与 baseline，保存输出、timing 和 grading；用现有聚合脚本生成 benchmark，再用 `eval-viewer/generate_review.py` 让用户评审。
+6. 从反馈中归纳可泛化问题，删除无效提示，解释 why，并把各测试重复创建的逻辑沉淀为脚本。重复循环直到用户满意或没有实质改进。
+
+## 触发描述优化
+
+准备 20 条接近真实使用的正负样本，重点覆盖相邻 skill 的易混淆边界；让用户确认后再运行优化循环，以 held-out test score 选择最佳描述，避免对训练样本过拟合。
+
+不要创建恶意、误导或超出描述预期的 skill。完整 eval workspace 结构、JSON schema 字段、子代理提示和命令保持上游英文正文为权威来源；执行前按需读取 `agents/*.md` 与 `references/schemas.md`。
 
 # Skill Creator
 

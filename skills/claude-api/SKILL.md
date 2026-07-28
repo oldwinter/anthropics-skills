@@ -1,11 +1,43 @@
 ---
 name: claude-api
 description: |-
-  Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration.
-  TRIGGER — read BEFORE opening the target file; don't skip because it "looks like a one-liner" — whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) — never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).
-  SKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named — don't Read the file).
+  Claude API / Anthropic SDK 权威参考，涵盖 model ID、价格、参数、streaming、tool use、MCP、agents、缓存、token counting 与 model migration。
+  触发：prompt 以任意形式提到 Claude/Anthropic/Fable/Opus/Sonnet/Haiku、`anthropic`、`@anthropic-ai`、`claude-*`、`us.anthropic.*` 或 `[1m]`；用户询问 LLM 价格、模型选择、限制或缓存；或者任务是未指定 provider 的 agent/MCP/tool/multi-agent/RAG/LLM judge/computer-use/NL 生成处理任务。必须在打开目标文件前读取，不得凭记忆回答。
+  仅当任务明确使用 OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama，或项目 provider 扫描命中对应 SDK 时跳过；未指定 provider 时必须先运行上游正文给出的 grep。
 license: Complete terms in LICENSE.txt
 ---
+
+# 使用 Claude 构建 LLM 应用（中文执行导读）
+
+## 开始前
+
+先扫描目标文件和项目中的非 Anthropic provider 标记。若发现 OpenAI 或其他 provider，停止修改并确认用户是要迁移到 Claude，还是保留非 Claude 实现。不要把 Anthropic SDK 调用写进非 Anthropic 文件。
+
+## 核心约束
+
+- 默认使用项目语言的官方 Anthropic SDK；仅在用户明确要求 REST/cURL、项目本身是 shell，或该语言没有官方 SDK 时使用 raw HTTP。不要混用，也不要使用 OpenAI-compatible shim。
+- 不得猜测 SDK 名称、namespace、method signature 或 import path。先读本 skill 中对应 `{lang}/` 文档；未覆盖时按 `shared/live-sources.md` 查官方来源。网络不可用时根据已包含文档写代码，再通过编译错误迭代。
+- 除非用户另有指定，模型使用精确 ID `claude-opus-5`；复杂任务启用 `thinking: {type: "adaptive"}`；长输入、长输出或较大 `max_tokens` 默认 streaming。
+- API 形状以本 skill 文档为准，不以训练记忆为准。保留所有 model ID、beta header、环境变量、路径、schema 字段和代码示例原文。
+
+## 执行顺序
+
+1. 检测 Python、TypeScript/JavaScript、Java/Kotlin/Scala、Go、Ruby、C#、PHP 或 cURL；多语言且目标不明确时确认范围。
+2. 选择最简单的合适 surface：单次请求 -> Claude API；受控多步流程 -> Claude API + tool use；需要 Anthropic 托管循环与 workspace -> Managed Agents。Claude Agent SDK 是独立产品，不要与 Tool Runner 或 Managed Agents 混淆。
+3. 始终先读 `{lang}/claude-api/README.md`，再按任务读取 streaming、tool-use、batches、files-api 或 `shared/` 专题文档。
+4. 用户要求 model migration 时立即读取 `shared/model-migration.md`，先确认具体文件/目录范围，再按指南执行；不要只做摘要。
+5. 用户询问 latest/current、缓存数据可疑或本地未覆盖功能时，使用 `shared/live-sources.md` 中的官方实时来源。
+
+## 高频边界
+
+- 新版模型使用 adaptive thinking；不要为新代码使用已弃用的 `budget_tokens`。
+- 结构化输出使用 `output_config.format`，不要使用旧 `output_format`。
+- tool result 必须保持与调用对应；并行 tool calls 的全部结果放在同一 user message。
+- 大输出使用 streaming；不要静默截断输入。
+- catch 具体异常链，区分 404、429、5xx 和连接错误；不要只捕获一个宽泛状态异常。
+- Agent Skills、Managed Agents、Tool Runner 与 Claude Agent SDK 是不同 surface，按英文权威正文的矩阵选择。
+
+下面保留上游英文正文和所有技术参考作为权威契约。中文导读用于导航，不替代精确 API 文档。
 
 # Building LLM-Powered Applications with Claude
 
