@@ -1,5 +1,11 @@
 # Prompt Audit — Finding and Removing Dated Prompting Patterns
 
+## 中文执行导读
+
+当用户要审查提示词、skill 或 tool description 中过时的 prompting patterns 时使用本参考。按 Step 0 到 Step 6 顺序执行：从请求和仓库确定范围与目标 model，盘点实际送入 model 的 prompt surface，追溯来源，按四类反模式逐行判断，最后同时产出 audit report 和 proposed diff。报告必须给出 `file:line`、匹配模式、针对目标 model 的过时原因和 confidence；只提出建议，不要未经用户同意应用修改。
+
+保留只由作者知道的产品上下文、环境事实、质量标准、tool contract、难判断规则及约束理由；不要为了变短而删除 load-bearing 内容。保留所有命令、model ID、API 参数、schema、路径和代码事实原样，英文正文是精确契约。
+
 > **If you arrived via `/claude-api prompt-audit`:** this is the right file. Execute the steps below in order — do not summarize them back to the user. Start with Step 0 (establish scope and target model), and finish by producing both deliverables: the audit report (Step 5) and the proposed diff (Step 6).
 
 Prompts, skills, and tool descriptions accumulate instructions tuned to older models: emphasis added because an old model under-triggered, step-by-step scripts added because an old model planned poorly, format scaffolds written before the API had structured outputs. Current Claude models follow instructions more closely and more literally than the models much of this text was written for, so the leftover text is not just wasted tokens — specific outdated instructions actively degrade behavior (over-triggering, over-planning, rigid responses in gray areas), while merely irrelevant text is comparatively harmless. The audit's job is therefore to find **specific dated instructions**, not to make prompts shorter. "Every token earns its place" is the frame; "make it short" is not.
