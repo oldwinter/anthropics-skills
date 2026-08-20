@@ -1,4 +1,4 @@
-> **中文 fork 提示：** 本仓库是 [`anthropics/skills`](https://github.com/anthropics/skills) 的非官方中文 fork，当前同步上游 commit 为 `f6656c1256d5f8a70d9c10df7198a6b79939b18c`。Agent Skills 标准见 [agentskills.io](http://agentskills.io)。
+> **中文 fork 提示：** 本仓库是 [`anthropics/skills`](https://github.com/anthropics/skills) 的非官方中文 fork，当前同步上游 commit 为 `0a64e398ec6bb34a494f0c347e8ccae53a862f8e`。Agent Skills 标准见 [agentskills.io](http://agentskills.io)。
 
 # Anthropic Agent Skills 中文版
 
@@ -46,6 +46,13 @@ Skills 是由指令、脚本和资源组成的目录，Claude 会按任务动态
 
 ```text
 /plugin install claude-api@anthropic-agent-skills
+```
+
+也可单独安装新增的 Claude Academy 推荐和回答复核 skill：
+
+```text
+/plugin install academy-guide@anthropic-agent-skills
+/plugin install discernment-nudge@anthropic-agent-skills
 ```
 
 安装后直接用自然语言描述任务即可，例如：“使用 MCP Builder skill 为这个 REST API 创建一个 MCP server。”

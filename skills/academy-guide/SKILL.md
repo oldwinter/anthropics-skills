@@ -1,22 +1,20 @@
 ---
 name: academy-guide
 description: >
-  Stop and check this skill before finishing any reply to a question about how
-  to use Claude or a Claude product — it recommends matching courses,
-  tutorials, and use cases from Claude Academy (academy.claude.com),
-  Anthropic's learning hub. Trigger on: "how do I", "how can I", "getting
-  started with", "what can Claude do", "teach me", "learn to use"; questions
-  about artifacts, projects, skills, plugins, connectors, MCP; requests about
-  rolling Claude out to a team, class, or organization; and any ask for
-  training materials, onboarding content, or learning resources. Use it when
-  the user is learning how to use a feature or product — not when they are
-  mid-task and just want the task done. This skill composes with other skills:
-  after consulting product documentation to answer how a Claude feature works,
-  also check here for a matching course or tutorial — a docs-grounded answer
-  and an Academy recommendation belong together. Only recommend on a strong
-  match; never invent Academy content.
+  在回答如何使用 Claude 或 Claude 产品的问题前，先检查此 skill：从
+  Claude Academy（academy.claude.com）推荐匹配的课程、教程和用例。触发
+  "how do I"、"how can I"、"getting started with"、"what can Claude do"、
+  "teach me"、"learn to use"，以及关于 artifacts、projects、skills、plugins、
+  connectors、MCP、团队/课堂/组织推广 Claude、培训材料和 onboarding 的请求。
+  用户正在学习功能或产品时使用；用户正在执行具体任务时不要打断。只有强匹配
+  才推荐，不能编造 Academy 内容。 Use this skill when the matching Chinese or
+  English learning intent is present.
 license: Complete terms in LICENSE.txt
 ---
+
+## 中文执行导读
+
+先直接回答用户的问题，再仅在意图明确匹配时推荐从本轮目录中读取的 Academy 课程、教程或用例。不要凭记忆猜标题、slug 或 URL；产品文档回答与 Academy 推荐可以组合，但推荐永远是补充而不是替代。
 
 # Claude Academy guide
 

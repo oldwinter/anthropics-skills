@@ -6,10 +6,11 @@
 
 - 上游项目：`anthropics/skills`
 - 中文 fork：`oldwinter/anthropics-skills`
-- 当前同步上游 commit：`f6656c1256d5f8a70d9c10df7198a6b79939b18c`
+- 当前同步上游 commit：`0a64e398ec6bb34a494f0c347e8ccae53a862f8e`
 - 主要安装面：Claude Code plugin marketplace
 - 目标用户：使用 Claude Code 和 Claude Agent Skills 的中文开发者
 - 中文 runtime 入口：11 个 Apache-2.0 示例 skill 的 `skills/*/SKILL.md`，以及 `skills/claude-api/SKILL.md`
+- 可单独安装的新增 runtime：`skills/academy-guide/SKILL.md`、`skills/discernment-nudge/SKILL.md`
 - 不应宣传为中文版安装的入口：`document-skills`、`doc-coauthoring`、`template`
 
 ## 中文化目标

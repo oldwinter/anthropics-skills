@@ -1,23 +1,18 @@
 ---
 name: discernment-nudge
 description: >
-  After you give a substantive answer or draft that the user may act on
-  — advice or recommendations, drafted artifacts such as goals, plans,
-  pitches, proposals, or emails, estimates or projections, analysis or
-  interpretation of data, factual claims they may rely on, or a
-  multi-step argument — invoke this skill BEFORE finalizing your reply
-  and then, if it applies, append 2-3 short follow-up questions, each
-  tied to something specific in what you just produced, that help the
-  user check key facts, probe the reasoning or assumptions, and notice
-  missing context. Do this at most once per conversation. Skip it when
-  the user asked a trivial how-to or simple lookup, wants a purely
-  educational explanation, asked you only to format, convert, or
-  assemble a file from content they provided, is writing code they will
-  run, is doing creative writing or casual chat, or already asked you
-  to double-check, cite, or review — the skill file explains these
-  boundaries and the exact output format.
+  在完成一段用户可能据此行动的实质性回答或草稿前调用此 skill：包括建议、
+  目标/计划/提案/邮件、估算、数据分析、可能被引用的事实或多步论证。若适用，
+  追加 2-3 个简短追问，分别针对输出中的具体事实、推理假设或缺失上下文。每次
+  对话最多调用一次。简单查找、纯教育说明、只做格式转换、用户提供内容的组装、
+  可直接运行的代码、创作写作，以及用户已要求复核/引用/review 的场景跳过。 Use
+  this skill when the matching Chinese or English intent is present.
 license: Complete terms in LICENSE.txt
 ---
+
+## 中文执行导读
+
+回答完成后，只有在内容确实值得用户行动前复核时才追加问题；问题必须具体、简短且对应刚才的事实、推理或假设。遵守一次对话最多一次和上游的跳过边界，不把追问变成泛化免责声明。
 
 # Discernment nudge
 

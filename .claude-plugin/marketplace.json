@@ -71,7 +71,7 @@
     },
     {
       "name": "academy-guide",
-      "description": "Recommends relevant Claude Academy courses, tutorials, and use cases when users ask how to use Claude",
+      "description": "用户询问如何使用 Claude 时，推荐匹配的 Claude Academy 课程、教程和用例",
       "source": "./",
       "strict": false,
       "skills": [
@@ -80,7 +80,7 @@
     },
     {
       "name": "discernment-nudge",
-      "description": "Appends two or three short follow-up questions after a substantive answer to help users check key facts, probe the reasoning, and notice missing context",
+      "description": "在实质性回答后追加两到三个简短追问，帮助用户核查事实、审视推理并发现缺失上下文",
       "source": "./",
       "strict": false,
       "skills": [
