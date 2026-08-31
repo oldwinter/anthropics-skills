@@ -132,6 +132,14 @@ WebFetch these when a binding (class, method, namespace, field) isn't covered in
 
 Each SDK repo also ships runnable programs under `examples/` — including the refusal-fallback / `fallbacks` examples (client-side middleware registration, fallback state, server-side `fallbacks` param). Fetch those for exact per-language syntax instead of translating another language's example.
 
+### SDK 跨大版本升级指南
+
+用于升级 SDK 包本身的大版本权威变更清单。随附的 `{lang}/claude-api/sdk-upgrade.md` 是可执行版本；两者不一致时，以仓库中的官方指南为准。
+
+| SDK                | URL                                                                         | Extraction Prompt                                                                                                   |
+| ------------------ | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Python (0.x → 1.x) | `https://github.com/anthropics/anthropic-sdk-python/blob/main/MIGRATION.md` | "Extract every breaking change with its before/after code, the new minimum Python version, and the upgrade command" |
+
 ---
 
 ## Fallback Strategy

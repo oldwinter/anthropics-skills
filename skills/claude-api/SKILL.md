@@ -2,7 +2,7 @@
 name: claude-api
 description: |-
   Claude API / Anthropic SDK 权威参考，涵盖 model ID、价格、参数、streaming、tool use、MCP、agents、缓存、token counting 与 model migration。
-  触发：prompt 以任意形式提到 Claude/Anthropic/Fable/Opus/Sonnet/Haiku、`anthropic`、`@anthropic-ai`、`claude-*`、`us.anthropic.*` 或 `[1m]`；用户询问 LLM 价格、模型选择、限制或缓存；或者任务是未指定 provider 的 agent/MCP/tool/multi-agent/RAG/LLM judge/computer-use/NL 生成处理任务。必须在打开目标文件前读取，不得凭记忆回答。
+  触发：prompt 以任意形式提到 Claude/Anthropic/Fable/Opus/Sonnet/Haiku、`anthropic`、`@anthropic-ai`、`claude-*`、`us.anthropic.*` 或 `[1m]`；用户询问 LLM 价格、模型选择、限制或缓存；或者任务是未指定 provider 的 agent/MCP/tool/multi-agent/RAG/LLM judge/computer-use/NL 生成、总结、提取、分类、重写、对话，或调试拒答、截断、流式传输、工具调用、token 等问题。必须在打开目标文件前读取，不得凭记忆回答。
   仅当任务明确使用 OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama，或项目 provider 扫描命中对应 SDK 时跳过；未指定 provider 时必须先运行上游正文给出的 grep。
 license: Complete terms in LICENSE.txt
 ---
@@ -92,6 +92,7 @@ If the User Request at the bottom of this prompt is a bare subcommand string (no
 |---|---|
 | `migrate` | Migrate existing Claude API code to a newer model. **Read `shared/model-migration.md` immediately** and follow it in order: Step 0 (confirm scope — ask which files/directories before any edit), Step 1 (classify each file), then the per-target breaking-changes section. Do not summarize the guide — execute it. If the user did not name a target model, ask which model to migrate to in the same turn as the scope question. After the per-target changes are applied, audit the in-scope prompt text, tool descriptions, and request code against `shared/prompt-audit.md` — prompting written for the source model is part of every migration, and it does not announce itself. |
 | `prompt-audit` | Audit existing prompts, skills, and tool descriptions for dated patterns ("cruft") written for older models. **Read `shared/prompt-audit.md` immediately** and follow it in order: Step 0 (establish scope and target model from the request and the repository — state the assumptions in the report, do not stop to ask), inventory, provenance, then the pattern scan. Produce both deliverables in full — the audit report (findings with `file:line`, pattern, why it's obsolete for the target model, confidence) and a proposed diff — without pausing for confirmation; apply edits only if the request explicitly asked for them. Do not summarize the guide — execute it. |
+| `upgrade` | 将项目的 Anthropic SDK 依赖跨大版本升级，目前覆盖 Python SDK 的 `anthropic` 0.x → 1.x。末尾单词可以指定语言和/或范围（`upgrade python`、`upgrade python sdk src/`）。**立即读取 `python/claude-api/sdk-upgrade.md`** 并按顺序执行：先完成步骤 0（确认范围，再确认当前版本和目标版本；写入版本约束前必须确认已有已发布的 1.x），然后执行步骤 1 的盘点、各编号章节、验证和报告。不要总结指南，直接执行。如果检测到或指定的语言没有 `sdk-upgrade.md`，说明该 SDK 目前没有随附的大版本升级指南，并指向该 SDK 在 `shared/live-sources.md` 中的 CHANGELOG；不要根据 Python 指南自行编写其他 SDK 的升级指南。这不是模型迁移；如需迁移到更新的 Claude 模型，请使用 `migrate`。 |
 
 ---
 
@@ -517,6 +518,8 @@ The Quick Task Reference below uses the `{lang}/claude-api/FILE.md` path notatio
 → Read `{lang}/claude-api/README.md` — see Compaction section
 **Migrating to a newer model (Fable 5 / Opus 5 / Opus 4.8 / Opus 4.7 / Opus 4.6 / Sonnet 5 / Sonnet 4.6), replacing a retired model, or translating `budget_tokens` / prefill patterns to the current API:**
 → Read `shared/model-migration.md`
+**跨大版本升级 Anthropic SDK 本身（`anthropic` 0.x → 1.x：`httpx2`、异步 `.with_raw_response` 需要 `await`、移除已弃用参数/别名/Text Completions、Python ≥ 3.10），或为已经使用 1.x 的项目编写新代码：**
+→ 读取 `{lang}/claude-api/sdk-upgrade.md`（目前仅提供 Python 指南；其他 SDK 尚无随附的大版本指南，请通过 `shared/live-sources.md` 中的 CHANGELOG 查阅）
 **Prompting or tuning Fable 5 (long turns, effort, verbosity, autonomous runs, sub-agents):**
 → Read `shared/model-migration.md` → Migrating to Fable 5 → Behavioral shifts (prompt-tunable) + Long-running agent recommendations
 **Prompt caching / optimize caching / "why is my cache hit rate low":**
