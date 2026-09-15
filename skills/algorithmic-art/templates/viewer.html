@@ -280,12 +280,38 @@
         }
 
         /* Canvas Area */
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            z-index: 20;
+            padding: 10px 14px;
+            background: var(--anthropic-dark);
+            color: var(--anthropic-light);
+            text-decoration: none;
+            border-radius: 8px;
+            transform: translateY(-200%);
+        }
+
+        .skip-link:focus-visible {
+            transform: none;
+        }
+
         .canvas-area {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             min-width: 0;
+        }
+
+        .canvas-area:focus {
+            outline: none;
+        }
+
+        .canvas-area:focus-visible {
+            outline: 2px solid var(--anthropic-orange);
+            outline-offset: 4px;
         }
 
         #canvas-container {
@@ -329,6 +355,7 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#artwork">Skip to artwork</a>
     <div class="container">
         <!-- Control Sidebar -->
         <div class="sidebar">
@@ -430,11 +457,11 @@
         </div>
 
         <!-- Main Canvas Area -->
-        <div class="canvas-area">
+        <main class="canvas-area" id="artwork" tabindex="-1">
             <div id="canvas-container">
                 <div class="loading">Initializing generative art...</div>
             </div>
-        </div>
+        </main>
     </div>
 
     <script>
