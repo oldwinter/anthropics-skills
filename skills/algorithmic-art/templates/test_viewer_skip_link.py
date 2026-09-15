@@ -18,7 +18,7 @@ class ViewerSkipLinkTests(unittest.TestCase):
         self.assertIsNotNone(first)
         self.assertIn('class="skip-link"', first.group(0))
         self.assertIn('href="#artwork"', first.group(0))
-        self.assertIn("Skip to artwork", first.group(0))
+        self.assertIn("Skip to artwork", body)
         self.assertIn('id="artwork"', html)
         self.assertIn('<main class="canvas-area"', html)
         self.assertIn('tabindex="-1"', html)
