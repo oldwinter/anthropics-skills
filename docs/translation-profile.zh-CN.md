@@ -12,6 +12,7 @@
 - 中文 runtime 入口：11 个 Apache-2.0 示例 skill 的 `skills/*/SKILL.md`，以及 `skills/claude-api/SKILL.md`
 - 可单独安装的新增 runtime：`skills/academy-guide/SKILL.md`、`skills/discernment-nudge/SKILL.md`
 - 不应宣传为中文版安装的入口：`document-skills`、`doc-coauthoring`、`template`
+- 中文入口选择表真源：[`docs/skill-map.zh-CN.md`](skill-map.zh-CN.md)。同步上游时按该表更新分类和边界，不要把 README 写回扁平 slug 清单。
 
 ## 中文化目标
 
@@ -59,3 +60,5 @@
 - 所有修改的 `SKILL.md` frontmatter 可由 `skills/skill-creator/scripts/quick_validate.py` 解析。
 - 与上游比较时，受限制或未明确授权的六个入口以及全部 `LICENSE.txt`、`THIRD_PARTY_NOTICES.md` 必须保持不变。
 - README 安装命令指向中文 fork，plugin 安装后实际加载带中文导读的 `SKILL.md`。
+- README 中文段与 [`docs/skill-map.zh-CN.md`](skill-map.zh-CN.md) 按用途分组；`claude-api` 不写进 `example-skills-zh` 成员。
+- `python3 tests/test_skill_map.py`

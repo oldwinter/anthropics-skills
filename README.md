@@ -4,29 +4,41 @@
 
 Skills 是由指令、脚本和资源组成的目录，Claude 会按任务动态加载它们，以可重复的方式完成专业工作。本 fork 在不改变命令、代码、schema 和运行时契约的前提下，为许可允许修改的 skill 增加中文触发说明和中文执行导读。
 
-## 中文化范围
+## 按用途选择入口
 
-可直接安装的中文入口包括：
+磁盘上的 `skills/` 是扁平目录。中文选择表真源是 [`docs/skill-map.zh-CN.md`](docs/skill-map.zh-CN.md)。先按任务选 skill slug，再按下一节安装对应 plugin。`claude-api`、`academy-guide`、`discernment-nudge` 是单独 plugin，不是 `example-skills-zh` 的成员。
 
-- `algorithmic-art`
-- `brand-guidelines`
-- `canvas-design`
-- `frontend-design`
-- `internal-comms`
-- `mcp-builder`
-- `skill-creator`
-- `slack-gif-creator`
-- `theme-factory`
-- `web-artifacts-builder`
-- `webapp-testing`
-- `claude-api`
+### 创作与设计
 
-长篇 API、协议、schema、代码示例和评测参考保留上游英文，中文执行导读负责导航到正确权威文件。
+| 任务 | 加载 | 不要用 |
+| --- | --- | --- |
+| 海报、静态视觉、单页 PNG/PDF | `canvas-design` | `frontend-design`、`algorithmic-art` |
+| 产品 UI、页面视觉方向 | `frontend-design` | `canvas-design`；复杂 React 工程才用 `web-artifacts-builder` |
+| 生成艺术、p5.js、粒子/流场 | `algorithmic-art` | `canvas-design`、`theme-factory` |
+| 已有幻灯片、文档、落地页换肤 | `theme-factory` | `brand-guidelines`（除非要 Anthropic 官方品牌） |
+| Anthropic 官方品牌色与字体 | `brand-guidelines` | `theme-factory` 的通用预设 |
+| 复杂 React + shadcn/ui artifact | `web-artifacts-builder` | 简单单文件 HTML/JSX；只要视觉方向时用 `frontend-design` |
+| Slack GIF / emoji 动画 | `slack-gif-creator` | `algorithmic-art` |
 
-以下入口不作为中文版分发：
+### 开发与技术
 
-- `docx`、`pdf`、`pptx`、`xlsx` 的许可明确禁止创建衍生作品，因此保持上游原文。
-- `doc-coauthoring` 与 `template` 没有明确授予衍生翻译许可，因此保持上游原文。
+| 任务 | 加载 |
+| --- | --- |
+| 为 REST API 建 MCP server | `mcp-builder` |
+| 创建或迭代 Agent Skill | `skill-creator` |
+| Playwright 测本地网页 | `webapp-testing` |
+
+### 企业与沟通
+
+| 任务 | 加载 |
+| --- | --- |
+| 内部状态报告、通讯、事故报告 | `internal-comms` |
+
+### 文档技能（不作为中文版分发）
+
+`docx`、`pdf`、`pptx`、`xlsx` 许可禁止衍生作品；`doc-coauthoring` 与 `template` 没有明确翻译许可。需要这些能力时用上游原文或 `document-skills` plugin，不要把它们当成中文版入口。
+
+长篇 API、协议、schema、代码示例和评测参考保留上游英文，中文执行导读负责导航到正确权威文件。完整边界见 [`docs/skill-map.zh-CN.md`](docs/skill-map.zh-CN.md)。
 
 ## 在 Claude Code 中安装中文版
 
