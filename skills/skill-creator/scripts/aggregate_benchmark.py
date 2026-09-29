@@ -231,6 +231,21 @@ def generate_benchmark(benchmark_dir: Path, skill_name: str = "", skill_path: st
     results = load_run_results(benchmark_dir)
     run_summary = aggregate_results(results)
 
+    run_counts_by_configuration: dict[str, list[int]] = {}
+    observed_counts: list[int] = []
+    for config, config_runs in results.items():
+        counts_by_eval: dict[int, int] = {}
+        for run in config_runs:
+            eval_id = run["eval_id"]
+            counts_by_eval[eval_id] = counts_by_eval.get(eval_id, 0) + 1
+        config_counts = sorted(set(counts_by_eval.values()))
+        run_counts_by_configuration[config] = config_counts
+        observed_counts.extend(config_counts)
+
+    runs_per_configuration = None
+    if observed_counts and len(set(observed_counts)) == 1:
+        runs_per_configuration = observed_counts[0]
+
     # Build runs array for benchmark.json
     runs = []
     for config in results:
@@ -268,7 +283,8 @@ def generate_benchmark(benchmark_dir: Path, skill_name: str = "", skill_path: st
             "analyzer_model": "<model-name>",
             "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "evals_run": eval_ids,
-            "runs_per_configuration": 3
+            "runs_per_configuration": runs_per_configuration,
+            "run_counts_by_configuration": run_counts_by_configuration,
         },
         "runs": runs,
         "run_summary": run_summary,
@@ -289,13 +305,18 @@ def generate_markdown(benchmark: dict) -> str:
     config_b = configs[1] if len(configs) >= 2 else "config_b"
     label_a = config_a.replace("_", " ").title()
     label_b = config_b.replace("_", " ").title()
+    runs_per_configuration = metadata.get("runs_per_configuration")
+    if runs_per_configuration is None:
+        run_count_text = "varying runs per configuration"
+    else:
+        run_count_text = f"{runs_per_configuration} runs each per configuration"
 
     lines = [
         f"# Skill Benchmark: {metadata['skill_name']}",
         "",
         f"**Model**: {metadata['executor_model']}",
         f"**Date**: {metadata['timestamp']}",
-        f"**Evals**: {', '.join(map(str, metadata['evals_run']))} ({metadata['runs_per_configuration']} runs each per configuration)",
+        f"**Evals**: {', '.join(map(str, metadata['evals_run']))} ({run_count_text})",
         "",
         "## Summary",
         "",
