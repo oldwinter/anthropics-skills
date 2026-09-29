@@ -16,7 +16,10 @@ import uuid
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
-from scripts.utils import parse_skill_md
+if __package__:
+    from .utils import parse_skill_md
+else:
+    from utils import parse_skill_md
 
 
 def find_project_root() -> Path:

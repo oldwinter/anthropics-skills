@@ -15,10 +15,16 @@ import time
 import webbrowser
 from pathlib import Path
 
-from scripts.generate_report import generate_html
-from scripts.improve_description import improve_description
-from scripts.run_eval import find_project_root, run_eval
-from scripts.utils import parse_skill_md
+if __package__:
+    from .generate_report import generate_html
+    from .improve_description import improve_description
+    from .run_eval import find_project_root, run_eval
+    from .utils import parse_skill_md
+else:
+    from generate_report import generate_html
+    from improve_description import improve_description
+    from run_eval import find_project_root, run_eval
+    from utils import parse_skill_md
 
 
 def split_eval_set(eval_set: list[dict], holdout: float, seed: int = 42) -> tuple[list[dict], list[dict]]:
