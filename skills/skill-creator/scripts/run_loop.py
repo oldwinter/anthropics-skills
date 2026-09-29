@@ -29,6 +29,9 @@ else:
 
 def split_eval_set(eval_set: list[dict], holdout: float, seed: int = 42) -> tuple[list[dict], list[dict]]:
     """Split eval set into train and test sets, stratified by should_trigger."""
+    if not 0 < holdout < 1:
+        raise ValueError("holdout must be greater than 0 and less than 1")
+
     random.seed(seed)
 
     # Separate by should_trigger
@@ -39,9 +42,13 @@ def split_eval_set(eval_set: list[dict], holdout: float, seed: int = 42) -> tupl
     random.shuffle(trigger)
     random.shuffle(no_trigger)
 
-    # Calculate split points
-    n_trigger_test = max(1, int(len(trigger) * holdout))
-    n_no_trigger_test = max(1, int(len(no_trigger) * holdout))
+    def test_count(items: list[dict]) -> int:
+        if len(items) < 2:
+            return 0
+        return min(len(items) - 1, max(1, int(len(items) * holdout)))
+
+    n_trigger_test = test_count(trigger)
+    n_no_trigger_test = test_count(no_trigger)
 
     # Split
     test_set = trigger[:n_trigger_test] + no_trigger[:n_no_trigger_test]
