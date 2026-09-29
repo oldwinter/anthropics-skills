@@ -69,8 +69,6 @@ def main():
             process = subprocess.Popen(
                 server['cmd'],
                 shell=True,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE
             )
             server_processes.append(process)
 
