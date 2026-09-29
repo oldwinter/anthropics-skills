@@ -20,15 +20,25 @@ import time
 import sys
 import argparse
 
-def is_server_ready(port, timeout=30):
-    """Wait for server to be ready by polling the port."""
+def is_port_open(port):
+    """Return whether a listener accepts connections on the port."""
+    try:
+        with socket.create_connection(('localhost', port), timeout=1):
+            return True
+    except (socket.error, ConnectionRefusedError):
+        return False
+
+
+def wait_for_server(process, port, timeout=30):
+    """Wait for the new server process to own a listening port."""
     start_time = time.time()
     while time.time() - start_time < timeout:
-        try:
-            with socket.create_connection(('localhost', port), timeout=1):
-                return True
-        except (socket.error, ConnectionRefusedError):
-            time.sleep(0.5)
+        returncode = process.poll()
+        if returncode is not None:
+            raise RuntimeError(f"Server process exited with status {returncode} before port {port} was ready")
+        if is_port_open(port):
+            return True
+        time.sleep(0.5)
     return False
 
 
@@ -63,20 +73,21 @@ def main():
     try:
         # Start all servers
         for i, server in enumerate(servers):
+            if is_port_open(server['port']):
+                raise RuntimeError(f"Port {server['port']} is already in use")
+
             print(f"Starting server {i+1}/{len(servers)}: {server['cmd']}")
 
             # Use shell=True to support commands with cd and &&
             process = subprocess.Popen(
                 server['cmd'],
                 shell=True,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE
             )
             server_processes.append(process)
 
             # Wait for this server to be ready
             print(f"Waiting for server on port {server['port']}...")
-            if not is_server_ready(server['port'], timeout=args.timeout):
+            if not wait_for_server(process, server['port'], timeout=args.timeout):
                 raise RuntimeError(f"Server failed to start on port {server['port']} within {args.timeout}s")
 
             print(f"Server ready on port {server['port']}")

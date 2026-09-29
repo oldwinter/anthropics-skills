@@ -75,6 +75,18 @@ class SkillCreatorCliTests(unittest.TestCase):
                 )
                 self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_package_usage_points_to_existing_script(self) -> None:
+        result = subprocess.run(
+            [sys.executable, "scripts/package_skill.py"],
+            cwd=SKILL_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("scripts/package_skill.py", result.stdout)
+        self.assertNotIn("utils/package_skill.py", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -229,7 +229,11 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
     "analyzer_model": "most-capable-model",
     "timestamp": "2026-01-15T10:30:00Z",
     "evals_run": [1, 2, 3],
-    "runs_per_configuration": 3
+    "runs_per_configuration": 3,
+    "run_counts_by_configuration": {
+      "with_skill": [3],
+      "without_skill": [3]
+    }
   },
 
   "runs": [
@@ -290,7 +294,8 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
   - `skill_name`: Name of the skill
   - `timestamp`: When the benchmark was run
   - `evals_run`: List of eval names or IDs
-  - `runs_per_configuration`: Number of runs per config (e.g. 3)
+  - `runs_per_configuration`: Uniform number of runs per eval and configuration, or `null` when counts vary
+  - `run_counts_by_configuration`: Sorted observed run counts for each configuration
 - `runs[]`: Individual run results
   - `eval_id`: Numeric eval identifier
   - `eval_name`: Human-readable eval name (used as section header in the viewer)

@@ -277,6 +277,14 @@ def generate_html(
         embedded["benchmark"] = benchmark
 
     data_json = json.dumps(embedded)
+    data_json = (
+        data_json
+        .replace("&", "\\u0026")
+        .replace("<", "\\u003c")
+        .replace(">", "\\u003e")
+        .replace("\u2028", "\\u2028")
+        .replace("\u2029", "\\u2029")
+    )
 
     return template.replace("/*__EMBEDDED_DATA__*/", f"const EMBEDDED_DATA = {data_json};")
 

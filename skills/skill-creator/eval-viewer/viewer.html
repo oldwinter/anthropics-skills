@@ -1131,7 +1131,11 @@
       if (metadata.skill_name) html += "<strong>" + escapeHtml(metadata.skill_name) + "</strong> &mdash; ";
       if (metadata.timestamp) html += metadata.timestamp + " &mdash; ";
       if (metadata.evals_run) html += "Evals: " + metadata.evals_run.join(", ") + " &mdash; ";
-      html += (metadata.runs_per_configuration || "?") + " runs per configuration";
+      if (Number.isInteger(metadata.runs_per_configuration)) {
+        html += metadata.runs_per_configuration + " runs per configuration";
+      } else {
+        html += "varying runs per configuration";
+      }
       html += "</p>";
 
       // Summary table
