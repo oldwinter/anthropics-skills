@@ -1,12 +1,45 @@
 """Shared utilities for skill-creator scripts."""
 
+import argparse
 from pathlib import Path
 
+
+def positive_int(value: str) -> int:
+    """Parse a positive integer for an argparse option."""
+    try:
+        parsed = int(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(f"invalid positive integer: {value}") from exc
+    if parsed <= 0:
+        raise argparse.ArgumentTypeError(f"invalid positive integer: {value}")
+    return parsed
+
+
+def unit_interval(value: str) -> float:
+    """Parse a floating-point value in the closed unit interval."""
+    try:
+        parsed = float(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(f"invalid probability: {value}") from exc
+    if not 0 <= parsed <= 1:
+        raise argparse.ArgumentTypeError(f"invalid probability: {value}")
+    return parsed
+
+
+def holdout_fraction(value: str) -> float:
+    """Parse zero or a floating-point holdout fraction below one."""
+    try:
+        parsed = float(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(f"invalid holdout fraction: {value}") from exc
+    if not 0 <= parsed < 1:
+        raise argparse.ArgumentTypeError(f"invalid holdout fraction: {value}")
+    return parsed
 
 
 def parse_skill_md(skill_path: Path) -> tuple[str, str, str]:
     """Parse a SKILL.md file, returning (name, description, full_content)."""
-    content = (skill_path / "SKILL.md").read_text()
+    content = (skill_path / "SKILL.md").read_text(encoding="utf-8")
     lines = content.split("\n")
 
     if lines[0].strip() != "---":

@@ -19,12 +19,12 @@ if __package__:
     from .generate_report import generate_html
     from .improve_description import improve_description
     from .run_eval import find_project_root, run_eval
-    from .utils import parse_skill_md
+    from .utils import holdout_fraction, parse_skill_md, positive_int, unit_interval
 else:
     from generate_report import generate_html
     from improve_description import improve_description
     from run_eval import find_project_root, run_eval
-    from utils import parse_skill_md
+    from utils import holdout_fraction, parse_skill_md, positive_int, unit_interval
 
 
 def split_eval_set(eval_set: list[dict], holdout: float, seed: int = 42) -> tuple[list[dict], list[dict]]:
@@ -259,12 +259,12 @@ def main():
     parser.add_argument("--eval-set", required=True, help="Path to eval set JSON file")
     parser.add_argument("--skill-path", required=True, help="Path to skill directory")
     parser.add_argument("--description", default=None, help="Override starting description")
-    parser.add_argument("--num-workers", type=int, default=10, help="Number of parallel workers")
-    parser.add_argument("--timeout", type=int, default=30, help="Timeout per query in seconds")
-    parser.add_argument("--max-iterations", type=int, default=5, help="Max improvement iterations")
-    parser.add_argument("--runs-per-query", type=int, default=3, help="Number of runs per query")
-    parser.add_argument("--trigger-threshold", type=float, default=0.5, help="Trigger rate threshold")
-    parser.add_argument("--holdout", type=float, default=0.4, help="Fraction of eval set to hold out for testing (0 to disable)")
+    parser.add_argument("--num-workers", type=positive_int, default=10, help="Number of parallel workers")
+    parser.add_argument("--timeout", type=positive_int, default=30, help="Timeout per query in seconds")
+    parser.add_argument("--max-iterations", type=positive_int, default=5, help="Max improvement iterations")
+    parser.add_argument("--runs-per-query", type=positive_int, default=3, help="Number of runs per query")
+    parser.add_argument("--trigger-threshold", type=unit_interval, default=0.5, help="Trigger rate threshold")
+    parser.add_argument("--holdout", type=holdout_fraction, default=0.4, help="Fraction of eval set to hold out for testing (0 to disable)")
     parser.add_argument("--model", required=True, help="Model for improvement")
     parser.add_argument("--verbose", action="store_true", help="Print progress to stderr")
     parser.add_argument("--report", default="auto", help="Generate HTML report at this path (default: 'auto' for temp file, 'none' to disable)")
