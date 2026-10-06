@@ -1,4 +1,4 @@
-> **中文 fork 提示：** 本仓库是 [`anthropics/skills`](https://github.com/anthropics/skills) 的非官方中文 fork，当前同步上游 commit 为 `33375500bcea98d610eb30ce10ac4e59b89c390d`。Agent Skills 标准见 [agentskills.io](http://agentskills.io)。
+> **中文 fork 提示：** 本仓库是 [`anthropics/skills`](https://github.com/anthropics/skills) 的非官方中文 fork，当前同步上游 commit 为 `683bc88e56f3e09ba94f7055977f3d3aa499f202`。Agent Skills 标准见 [agentskills.io](http://agentskills.io)。
 
 # Anthropic Agent Skills 中文版
 

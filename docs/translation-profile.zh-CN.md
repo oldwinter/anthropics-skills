@@ -6,7 +6,7 @@
 
 - 上游项目：`anthropics/skills`
 - 中文 fork：`oldwinter/anthropics-skills`
-- 当前同步上游 commit：`33375500bcea98d610eb30ce10ac4e59b89c390d`
+- 当前同步上游 commit：`683bc88e56f3e09ba94f7055977f3d3aa499f202`
 - 主要安装面：Claude Code plugin marketplace
 - 目标用户：使用 Claude Code 和 Claude Agent Skills 的中文开发者
 - 中文 runtime 入口：11 个 Apache-2.0 示例 skill 的 `skills/*/SKILL.md`，以及 `skills/claude-api/SKILL.md`
